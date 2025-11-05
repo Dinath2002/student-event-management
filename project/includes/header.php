@@ -11,10 +11,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="/">SEM</a>
-    <div class="navbar-nav"><a class="nav-link text-white" href="/events.php">Events</a></div>
+    <div class="navbar-nav">
+      <a class="nav-link text-white" href="/events.php">Events</a>
+    </div>
     <div class="ms-auto navbar-nav">
       <?php if (empty($_SESSION['user'])): ?>
-        <a class="nav-link text-white" href="/login.php">Login</a>
+        <a class="nav-link text-white" href="/index.php">Login</a>
         <a class="nav-link text-white" href="/register.php">Sign up</a>
       <?php else: ?>
         <span class="nav-link text-white">Hi, <?= htmlspecialchars($_SESSION['user']['name']) ?></span>

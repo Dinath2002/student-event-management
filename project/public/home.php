@@ -1,11 +1,10 @@
 <?php
-// show errors while developing
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
+require_once __DIR__ . '/../config/auth.php';
+require_login();
 include __DIR__ . '/../includes/header.php';
 ?>
-<h1 class="mb-3">Student Event Management</h1>
-<p>Browse and register for upcoming university events.</p>
-<a href="/events.php" class="btn btn-primary">View Events</a>
+<h2>Welcome, <?= htmlspecialchars($_SESSION['user']['name']) ?>!</h2>
+<p>Use the buttons below to continue.</p>
+<a class="btn btn-primary" href="/events.php">View Events</a>
+<a class="btn btn-outline-secondary" href="/logout.php">Logout</a>
 <?php include __DIR__ . '/../includes/footer.php'; ?>
