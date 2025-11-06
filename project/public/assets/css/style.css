@@ -1,0 +1,97 @@
+:root {
+  --primary: #0066cc;
+  --secondary: #004c99;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+}
+
+.navbar-dark.bg-dark {
+  background-color: var(--secondary) !important;
+}
+
+/* ===== Global layout ===== */
+body {
+  font-family: "Poppins", "Inter", sans-serif;
+  background-color: #f7f9fc;
+  color: #222;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+  padding-top: 2rem;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Cards ===== */
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Buttons ===== */
+.btn {
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #f0f0f0;
+}
+
+/* ===== Forms ===== */
+form.card {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.form-control {
+  border-radius: 8px;
+}
+
+/* ===== Alerts ===== */
+.alert {
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  color: #777;
+  font-size: 0.9rem;
+  margin-top: auto;
+}
