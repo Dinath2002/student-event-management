@@ -1,46 +1,59 @@
 <?php
-// 1) sessions + (optional) force login
+// 1) Sessions + (optional) force login
 require_once __DIR__ . '/../config/auth.php';
-// If you want events only for logged-in users, uncomment:
+// If you want events only for logged-in users, uncomment next line:
 // require_login();
 
 require_once __DIR__ . '/../config/db.php';
 
-// 2) fetch events
-$stmt = $pdo->query("SELECT event_id, title, date, venue, organizer, description
-                     FROM events ORDER BY date ASC");
+// 2) Fetch events (ordered by date)
+$stmt = $pdo->query("
+  SELECT event_id, title, date, venue, organizer, description
+  FROM events
+  ORDER BY date ASC
+");
 $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// 3) header (navbar shows greeting if session exists)
+// 3) Header (navbar shows greeting if session exists)
 include __DIR__ . '/../includes/header.php';
 ?>
-<h2 class="mb-3">All Events</h2>
 
-<?php if (empty($events)): ?>
-  <div class="alert alert-secondary">No events yet.</div>
-<?php else: ?>
-  <div class="row row-cols-1 row-cols-md-2 g-3">
-    <?php foreach ($events as $e): ?>
-      <div class="col">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title"><?= htmlspecialchars($e['title']) ?></h5>
-            <p class="mb-2">
-              <strong>Date:</strong> <?= htmlspecialchars($e['date']) ?><br>
-              <strong>Venue:</strong> <?= htmlspecialchars($e['venue']) ?><br>
-              <strong>Organizer:</strong> <?= htmlspecialchars($e['organizer'] ?? 'Student Union') ?>
-            </p>
-            <p class="card-text"><?= nl2br(htmlspecialchars($e['description'])) ?></p>
-            <?php if (!empty($_SESSION['user'])): ?>
-              <a class="btn btn-primary" href="/event.php?id=<?= (int)$e['event_id'] ?>">View & Register</a>
-            <?php else: ?>
-              <a class="btn btn-outline-primary" href="/login.php">Login to Register</a>
+<div class="gh-page">
+  <h3 class="mb-3">All Events</h3>
+
+  <?php if (empty($events)): ?>
+    <div class="alert alert-warning">No events yet.</div>
+  <?php else: ?>
+    <div class="event-grid">
+      <?php foreach ($events as $e): ?>
+        <div class="card p-3 event-card h-100">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <div class="title"><?= htmlspecialchars($e['title']) ?></div>
+            <?php if (!empty($e['venue'])): ?>
+              <span class="badge text-bg-light border"><?= htmlspecialchars($e['venue']) ?></span>
             <?php endif; ?>
           </div>
+
+          <div class="meta mb-2">
+            <?= htmlspecialchars($e['date']) ?>
+            <?php if (!empty($e['organizer'])): ?>
+              • <?= htmlspecialchars($e['organizer']) ?>
+            <?php endif; ?>
+          </div>
+
+          <?php if (!empty($e['description'])): ?>
+            <p class="mb-3 text-muted"><?= nl2br(htmlspecialchars($e['description'])) ?></p>
+          <?php endif; ?>
+
+          <?php if (is_logged_in()): ?>
+            <a class="btn btn-primary btn-sm" href="/event.php?id=<?= (int)$e['event_id'] ?>">View &amp; Register</a>
+          <?php else: ?>
+            <a class="btn btn-outline-secondary btn-sm" href="/login.php">Login to Register</a>
+          <?php endif; ?>
         </div>
-      </div>
-    <?php endforeach; ?>
-  </div>
-<?php endif; ?>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
+</div>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>
