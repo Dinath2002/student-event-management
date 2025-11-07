@@ -1,9 +1,9 @@
-</div> <!-- closes main container from header -->
+</div> <!-- .container gh-page -->
 
-<footer class="mt-auto">
-  <div class="container d-flex justify-content-between align-items-center py-3">
-    <span class="fw-semibold">SEM</span>
-    <span class="text-muted">© <?= date('Y') ?> Student Event Management</span>
+<footer>
+  <div class="container d-flex justify-content-between align-items-center">
+    <span>SEM</span>
+    <span>© <?= date('Y') ?> Student Event Management</span>
   </div>
 </footer>
 
