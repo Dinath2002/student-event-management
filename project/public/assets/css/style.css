@@ -43,6 +43,30 @@ body {
 .navbar .nav-link:hover {
   color: var(--text) !important;
 }
+/* Navbar + logo */
+.navbar {
+  background-color: #161b22 !important;
+  border-bottom: 1px solid #30363d;
+}
+
+.navbar-brand {
+  font-size: 1.1rem;
+  color: #f0f6fc !important;
+}
+
+.nav-logo {
+  height: 30px;
+  width: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-logo:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
 
 /* Cards */
 .card {
@@ -276,4 +300,88 @@ footer {
   border-color: var(--border) !important;
   background: #0f141b !important;
   color: var(--text) !important;
+}
+
+
+/* ===== Footer logo inside thin bar ===== */
+footer {
+  background-color: #161b22 !important;
+  border-top: 1px solid #30363d;
+}
+
+/* footer bar container */
+.footer-bar {
+  background-color: #161b22 !important;
+  border-top: 1px solid #30363d;
+  color: #8b949e;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0.7rem 0;
+}
+
+/* logo inside footer */
+.footer-bar-logo {
+  height: 45px;               /* smaller and balanced height */
+  width: auto;
+  border-radius: 10px;        /* rounded edges */
+  opacity: 0.95;              /* corrected from 1.95 (invalid) */
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-bar-logo:hover {
+  opacity: 1;
+  transform: scale(1.03);
+}
+/* === Final polish for login/register centering === */
+.gh-auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding-top: 20px;
+}
+
+.auth-card {
+  width: 420px;
+  background-color: #161b22 !important;
+  border: 1px solid #30363d;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+.auth-card h2 {
+  color: #f0f6fc;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.auth-card .form-label {
+  color: #c9d1d9;
+}
+
+.auth-card .form-control {
+  background-color: #0d1117;
+  border-color: #30363d;
+  color: #f0f6fc;
+}
+
+.auth-card .form-control:focus {
+  border-color: #2f81f7;
+  box-shadow: 0 0 0 2px rgba(47, 129, 247, 0.25);
+}
+
+.gh-auth-subtext {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #8b949e;
+}
+
+.gh-auth-subtext a {
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+.gh-auth-subtext a:hover {
+  text-decoration: underline;
 }

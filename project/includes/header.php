@@ -15,7 +15,10 @@ require_once __DIR__ . '/../config/auth.php';
 
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid px-4">
-    <a class="navbar-brand" href="/events.php">SEM</a>
+    <a class="navbar-brand d-flex align-items-center text-light" href="/events.php">
+  <img src="/assets/img/footer-banner.png" alt="SEM Logo" class="nav-logo me-2">
+  <span class="fw-bold">SEM</span>
+</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
       <span class="navbar-toggler-icon"></span>
