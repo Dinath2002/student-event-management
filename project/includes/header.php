@@ -16,9 +16,9 @@ require_once __DIR__ . '/../config/auth.php';
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid px-4">
     <a class="navbar-brand d-flex align-items-center text-light" href="/events.php">
-  <img src="/assets/img/footer-banner.png" alt="SEM Logo" class="nav-logo me-2">
-  <span class="fw-bold">SEM</span>
-</a>
+      <img src="/assets/img/footer-banner.png" alt="SEM Logo" class="nav-logo me-2">
+      <span class="fw-bold">SEM</span>
+    </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
       <span class="navbar-toggler-icon"></span>
@@ -34,6 +34,12 @@ require_once __DIR__ . '/../config/auth.php';
           <li class="nav-item">
             <a class="nav-link<?= ($_SERVER['REQUEST_URI'] === '/admin_add_event.php') ? ' active' : '' ?>" href="/admin_add_event.php">
               Add Event
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link<?= ($_SERVER['REQUEST_URI'] === '/admin_registrations.php') ? ' active' : '' ?>" href="/admin_registrations.php">
+              Registrations
             </a>
           </li>
         <?php endif; ?>
@@ -64,7 +70,7 @@ require_once __DIR__ . '/../config/auth.php';
 </nav>
 
 <?php
-// flash messages (if any)
+// Flash message handler
 if (!empty($_SESSION['flash'])): ?>
   <div class="container mt-3">
     <?php foreach ($_SESSION['flash'] as $type => $messages): ?>
