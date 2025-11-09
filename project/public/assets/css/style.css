@@ -83,15 +83,31 @@ body {
   border: 1px solid var(--border);
   color: var(--text);
 }
+
+/* Main accent button with gradient + glow */
 .btn-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #ffffff;
+  background: linear-gradient(90deg, #238636, #2ea043) !important;
+  border: none !important;
+  color: #fff !important;
+  font-weight: 500;
+  box-shadow: 0 0 10px rgba(35, 134, 54, 0.4);
+  transition: all 0.2s ease-in-out;
 }
 .btn-primary:hover {
-  background: var(--accent-hover);
-  border-color: var(--accent-hover);
+  transform: scale(1.03);
+  box-shadow: 0 0 14px rgba(46, 160, 67, 0.6);
 }
+
+/* Disabled state styling for visibility */
+.btn:disabled,
+.btn.disabled {
+  background: #2f81f7 !important;
+  border: none !important;
+  color: #fff !important;
+  opacity: 0.6;
+}
+
+/* Success variant */
 .btn-success {
   background: #238636;
   border-color: #238636;
@@ -384,4 +400,54 @@ footer {
 
 .gh-auth-subtext a:hover {
   text-decoration: underline;
+}
+/* ===== Final visibility fixes for Events page ===== */
+
+/* Event card titles */
+.event-card .title,
+.card.event-card .card-title {
+  color: #f0f6fc !important;
+  font-weight: 600;
+}
+
+/* Meta line: date, organizer, etc. */
+.event-card .meta {
+  color: #9fb5d1 !important;    /* lighter blue-grey, clearly visible */
+  font-size: 0.9rem;
+}
+
+/* Descriptions inside cards */
+.event-card .card-text,
+.event-card p,
+.event-card .text-muted {
+  color: #c9d1d9 !important;    /* readable body text */
+}
+
+/* Venue badges (Auditorium / Main Hall) */
+.event-card .badge,
+.event-card .badge.bg-light,
+.event-card .badge.text-bg-light {
+  background-color: #21262d !important;
+  color: #f0f6fc !important;
+  border: 1px solid #30363d !important;
+  font-weight: 500;
+}
+
+/* Outline "Login to Register" buttons on dark bg */
+.event-card .btn-outline-secondary,
+.event-card .btn-outline-primary {
+  color: #58a6ff !important;
+  border-color: #3a3f45 !important;
+  background-color: transparent !important;
+}
+.event-card .btn-outline-secondary:hover,
+.event-card .btn-outline-primary:hover {
+  color: #ffffff !important;
+  background-color: rgba(47,129,247,0.18) !important;
+  border-color: #2f81f7 !important;
+}
+.alert-success {
+  background-color: #1a472a !important;  /* dark green background */
+  color: #c9f7d0 !important;              /* soft green text */
+  border: 1px solid #26734d !important;  /* accent border */
 }
