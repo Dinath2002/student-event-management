@@ -561,6 +561,572 @@ body {
 }
 
 /* Footer link hover */
+/* ================================
+   Clean Modern Footer
+   ================================ */
+/* php -S localhost:8000 -t project/public */
+
+/* ================================
+   GitHub DARK – Base Design Tokens
+   ================================ */
+:root {
+  --bg: #0d1117;            /* page background */
+  --panel: #161b22;         /* cards, navbars, footer */
+  --border: #30363d;
+  --text: #f0f6fc;          /* bright text */
+  --muted: #8b949e;
+  --accent: #2f81f7;
+  --accent-hover: #1f6feb;
+  --link: #58a6ff;
+  --link-hover: #79c0ff;
+  --radius: 12px;
+  --shadow: 0 0 0 1px rgba(240,246,252,0.05), 0 8px 24px rgba(1,4,9,0.6);
+
+  /* Bootstrap-ish overrides for consistency */
+  --bs-body-color: var(--text);
+  --bs-secondary-color: #9aa4af;
+  --bs-secondary-color-rgb: 154,164,175;
+  --bs-border-color: var(--border);
+}
+
+/* ================================
+   Reset + Base Layout
+   ================================ */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ================================
+   Navbar + Logo
+   ================================ */
+.navbar {
+  background-color: var(--panel) !important;
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-brand {
+  font-size: 1.1rem;
+  color: var(--text) !important;
+  font-weight: 600;
+}
+
+.navbar .nav-link {
+  color: var(--muted) !important;
+}
+
+/* GitHub-style underline handled later in transitions section */
+
+.nav-logo {
+  height: 30px;
+  width: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
+}
+
+/* ================================
+   Cards
+   ================================ */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+/* Auth cards (login / register) */
+.auth-card {
+  width: 420px;
+  background-color: var(--panel) !important;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+.auth-card h2 {
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+/* ================================
+   Buttons
+   ================================ */
+.btn {
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* Main accent: green gradient (GitHub-ish success feel) */
+.btn-primary {
+  background: linear-gradient(90deg, #238636, #2ea043) !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-weight: 500;
+  box-shadow: 0 0 10px rgba(35, 134, 54, 0.4);
+}
+
+/* Visible disabled state */
+.btn:disabled,
+.btn.disabled {
+  background: #2f81f7 !important;
+  border: none !important;
+  color: #ffffff !important;
+  opacity: 0.6;
+}
+
+/* Success variant (if used separately) */
+.btn-success {
+  background: #238636 !important;
+  border-color: #238636 !important;
+  color: #ffffff !important;
+}
+
+.btn-success:hover {
+  background: #2ea043 !important;
+  border-color: #2ea043 !important;
+}
+
+/* Outline primary (e.g., "Login to Register") */
+.btn-outline-primary {
+  color: var(--link) !important;
+  border-color: #3a3f45 !important;
+  background: transparent !important;
+}
+
+.btn-outline-primary:hover {
+  color: #ffffff !important;
+  background: rgba(47,129,247,.18) !important;
+  border-color: var(--accent) !important;
+}
+
+/* ================================
+   Forms / Inputs
+   ================================ */
+.form-label {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.form-control {
+  background: #0d1117;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.form-control::placeholder {
+  color: #9aa4af;
+}
+
+.form-control:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.25rem rgba(47,129,247,0.3);
+  outline: 0;
+}
+
+/* Auth forms specifically */
+.auth-card .form-label {
+  color: #c9d1d9;
+}
+
+.auth-card .form-control {
+  background-color: #0d1117;
+  border-color: #30363d;
+  color: #f0f6fc;
+}
+
+.auth-card .form-control:focus {
+  border-color: #2f81f7;
+  box-shadow: 0 0 0 2px rgba(47,129,247,0.25);
+}
+
+/* ================================
+   Typography & Links
+   ================================ */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+  font-weight: 600;
+}
+
+p, label, small, strong, span {
+  color: var(--text);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* ================================
+   Alerts
+   ================================ */
+.alert {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  color: var(--text);
+  background-color: var(--panel);
+}
+
+.alert-secondary {
+  background: #161b22;
+  color: var(--text);
+}
+
+/* Success alert (green instead of yellow) */
+.alert-success {
+  background-color: #1a472a !important;
+  color: #c9f7d0 !important;
+  border: 1px solid #26734d !important;
+}
+
+/* ================================
+   Layout Helpers
+   ================================ */
+.gh-page {
+  flex: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.gh-auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding-top: 20px;
+}
+
+.gh-auth-subtext {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.gh-auth-subtext a {
+  color: var(--link);
+}
+
+.gh-auth-subtext a:hover {
+  color: var(--link-hover);
+}
+
+/* ================================
+   Dark Overrides (no white blocks)
+   ================================ */
+body,
+html,
+.container,
+.gh-page,
+section,
+main,
+div.bg-light,
+div.bg-white,
+.bg-body,
+.bg-light,
+.bg-white {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+/* Panels */
+.card,
+.navbar,
+footer,
+.auth-card {
+  background-color: var(--panel) !important;
+  border-color: var(--border) !important;
+}
+
+/* Text muted / secondary */
+.text-muted,
+.text-body-secondary,
+.small,
+.form-text {
+  color: #9aa4af !important;
+}
+
+/* Generic input override (safety net) */
+input,
+textarea,
+select {
+  background-color: #0d1117 !important;
+  color: #f0f6fc !important;
+  border: 1px solid #30363d !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #2f81f7 !important;
+  box-shadow: 0 0 0 0.2rem rgba(47,129,247,0.25);
+  outline: none;
+}
+
+/* ================================
+   Events Page Styling
+   ================================ */
+.event-card {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.event-card .title,
+.card.event-card .card-title {
+  color: #f0f6fc !important;
+  font-weight: 600;
+}
+
+.event-card .meta {
+  color: #9fb5d1 !important;
+  font-size: 0.9rem;
+}
+
+.event-card .card-text,
+.event-card p,
+.event-card .text-muted {
+  color: #c9d1d9 !important;
+}
+
+/* Venue badges */
+.event-card .badge,
+.event-card .badge.bg-light,
+.event-card .badge.text-bg-light,
+.badge,
+.badge.bg-light,
+.badge.text-bg-light {
+  background-color: #21262d !important;
+  color: #f0f6fc !important;
+  border: 1px solid #30363d !important;
+  font-weight: 500;
+}
+
+/* "Login to Register" / outline buttons in event cards */
+.event-card .btn-outline-secondary,
+.event-card .btn-outline-primary {
+  color: #58a6ff !important;
+  border-color: #3a3f45 !important;
+  background-color: transparent !important;
+}
+
+.event-card .btn-outline-secondary:hover,
+.event-card .btn-outline-primary:hover {
+  color: #ffffff !important;
+  background-color: rgba(47,129,247,0.18) !important;
+  border-color: #2f81f7 !important;
+}
+
+/* ================================
+   Footer + Logo Bar
+   ================================ */
+footer {
+  background-color: var(--panel) !important;
+  border-top: 1px solid var(--border);
+  color: var(--muted) !important;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 0.9rem;
+}
+
+/* Thin footer bar (used if you place logo there) */
+.footer-bar {
+  background-color: var(--panel) !important;
+  border-top: 1px solid var(--border);
+  color: #8b949e;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0.7rem 0;
+}
+
+.footer-bar-logo {
+  height: 45px;
+  width: auto;
+  border-radius: 10px;
+  opacity: 0.95;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-bar-logo:hover {
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+/* ================================
+   Smooth Transitions & Animations
+   ================================ */
+
+/* Page fade-in */
+body {
+  opacity: 0;
+  animation: gh-page-fade-in 0.35s ease-out forwards;
+}
+
+@keyframes gh-page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navbar links – subtle underline + color on hover */
+.navbar .nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+  opacity: 0;
+}
+
+.navbar .nav-link:hover {
+  color: var(--text) !important;
+}
+
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* Brand logo hover */
+.nav-logo {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-logo:hover {
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+  opacity: 0.96;
+}
+
+/* Buttons – smooth + slight lift */
+.btn {
+  transition:
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.16s ease;
+}
+
+.btn-primary,
+.btn-success {
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(46, 160, 255, 0.25);
+}
+
+/* Outline buttons hover */
+.btn-outline-primary {
+  transition:
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.16s ease;
+}
+
+.btn-outline-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(88, 166, 255, 0.18);
+}
+
+/* Cards / event tiles – lift on hover */
+.card,
+.event-card,
+.auth-card {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background-color 0.22s ease;
+}
+
+.card:hover,
+.event-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(1, 4, 9, 0.75);
+  border-color: var(--accent);
+}
+
+/* Keep auth card slightly softer */
+.auth-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(1, 4, 9, 0.85);
+}
+
+/* Inputs – smooth focus highlight */
+.form-control {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Flash alerts – slide/fade in */
+.alert {
+  animation: gh-alert-in 0.25s ease-out;
+}
+
+@keyframes gh-alert-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Footer link hover */
 footer a {
   transition: color 0.2s ease, opacity 0.2s ease;
 }
@@ -586,4 +1152,228 @@ footer {
   position: relative;
   bottom: 0;
   width: 100%;
+}
+/* Event card image banner */
+.event-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.event-thumb {
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.event-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.event-body .btn {
+  margin-top: auto;
+}
+.event-create-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 16px 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.event-create-card {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 18px;
+  padding-top: 28px !important;
+  padding-bottom: 24px !important;
+}
+
+.event-banner-input .form-control {
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+}
+
+.event-create-card h3 {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 576px) {
+  .event-create-card {
+    max-width: 100%;
+    margin-top: 12px;
+  }
+}
+/* =============== Add Event Page Styling =============== */
+.event-create-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 50px 16px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.event-create-card {
+  width: 100%;
+  max-width: 540px;
+  background-color: #161b22;
+  border-radius: 16px;
+  border: 1px solid #30363d;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  transition: all 0.25s ease;
+}
+
+.event-create-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.75);
+}
+
+.event-create-card h2 {
+  font-size: 1.6rem;
+  color: #f0f6fc;
+}
+
+.event-create-card .form-label {
+  font-weight: 500;
+  color: #f0f6fc;
+}
+
+.event-create-card .form-control {
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  color: #f0f6fc;
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+}
+
+.event-create-card .form-control:focus {
+  border-color: #2f81f7;
+  box-shadow: 0 0 0 2px rgba(47, 129, 247, 0.25);
+}
+
+.event-create-card .form-text {
+  color: #8b949e;
+  font-size: 0.8rem;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #238636, #2ea043);
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  box-shadow: 0 0 10px rgba(35, 134, 54, 0.4);
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 14px rgba(46, 160, 67, 0.6);
+}
+
+@media (max-width: 576px) {
+  .event-create-card {
+    max-width: 100%;
+    padding: 1.5rem !important;
+  }
+}
+/* === Custom purple calendar icon === */
+input[type="date"] {
+  position: relative;
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  color: #f0f6fc;
+  border-radius: 8px;
+  padding: 0.55rem 2.5rem 0.55rem 0.75rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+/* Hide native calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+  width: 18px;
+  height: 18px;
+}
+
+/* Add custom purple calendar icon */
+input[type="date"]::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  background: url("data:image/svg+xml,%3Csvg fill='%239c6bff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z'/%3E%3C/svg%3E")
+    no-repeat center;
+  background-size: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 0 2px rgba(156,107,255,0.4));
+}
+
+/* Add focus glow effect */
+input[type="date"]:focus {
+  border-color: #9c6bff;
+  box-shadow: 0 0 0 2px rgba(156, 107, 255, 0.25);
+  outline: none;
+}
+* {
+  transition: all 0.25s ease;
+}
+/* ================================
+   File Upload Visibility Enhancement (Dark Glow Version)
+   ================================ */
+input[type="file"] {
+  background-color: #161b22 !important;  /* dark panel */
+  color: #f0f6fc !important;             /* bright text */
+  border: 1px solid #30363d !important;
+  border-radius: 8px;
+  padding: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Hover effect – smooth blue/purple tone */
+input[type="file"]:hover {
+  border-color: #9c6bff !important; /* purple accent */
+  box-shadow: 0 0 8px rgba(156, 107, 255, 0.35);
+  background-color: #1b1f27 !important;
+}
+
+/* Focus glow – subtle neon purple/blue mix */
+input[type="file"]:focus {
+  outline: none;
+  border-color: #9c6bff !important;
+  box-shadow: 0 0 12px rgba(156, 107, 255, 0.45);
+}
+
+/* File chooser button styling */
+input[type="file"]::file-selector-button {
+  background: linear-gradient(90deg, #8257e5, #9c6bff); /* smooth purple gradient */
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Hover glow for the button */
+input[type="file"]::file-selector-button:hover {
+  background: linear-gradient(90deg, #9c6bff, #b388ff);
+  box-shadow: 0 0 10px rgba(156, 107, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+/* Info text under input */
+.form-text {
+  color: #9aa4af !important;
 }
