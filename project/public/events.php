@@ -2,11 +2,19 @@
 require_once __DIR__ . '/../config/auth.php';
 require_once __DIR__ . '/../config/db.php';
 
+if (!$pdo) {
+    http_response_code(500);
+    exit('Database connection failed');
+}
 $stmt = $pdo->query("
   SELECT event_id, title, date, venue, organizer, description, image_path
   FROM events
   ORDER BY date ASC
 ");
+if (!$stmt) {
+    http_response_code(500);
+    exit('Database query failed');
+}
 $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 include __DIR__ . '/../includes/header.php';
@@ -54,17 +62,27 @@ include __DIR__ . '/../includes/header.php';
                 </p>
               <?php endif; ?>
 
-              <?php if (is_logged_in()): ?>
-                <a class="btn btn-primary w-100"
-                   href="/event_register.php?id=<?= (int)$e['event_id'] ?>">
-                  Register
-                </a>
-              <?php else: ?>
-                <a class="btn btn-outline-primary w-100"
-                   href="/login.php">
-                  Login to Register
-                </a>
-              <?php endif; ?>
+              <div class="d-flex gap-2">
+                <?php if (is_logged_in()): ?>
+                  <a class="btn btn-primary flex-grow-1"
+                     href="/event_register.php?id=<?= (int)$e['event_id'] ?>">
+                    Register
+                  </a>
+                <?php else: ?>
+                  <a class="btn btn-outline-primary flex-grow-1"
+                     href="/login.php">
+                    Login to Register
+                  </a>
+                <?php endif; ?>
+
+                <?php if (is_admin()): ?>
+                  <a class="btn btn-outline-secondary"
+                     href="/admin_edit_event.php?id=<?= (int)$e['event_id'] ?>"
+                     title="Edit event">
+                    ✏️
+                  </a>
+                <?php endif; ?>
+              </div>
             </div>
 
           </div>

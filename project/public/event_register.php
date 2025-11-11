@@ -6,7 +6,15 @@ require_login();
 
 $event_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
+if (!$pdo) {
+    http_response_code(500);
+    exit('Database connection failed');
+}
 $stmt = $pdo->prepare("SELECT * FROM events WHERE event_id = ?");
+if (!$stmt) {
+    http_response_code(500);
+    exit('Database query preparation failed');
+}
 $stmt->execute([$event_id]);
 $event = $stmt->fetch(PDO::FETCH_ASSOC);
 

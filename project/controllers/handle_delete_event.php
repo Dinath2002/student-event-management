@@ -19,7 +19,13 @@ if (!$event_id) {
 
 try {
     // fetch image path to delete file
+    if (!$pdo) {
+        throw new Exception('Database connection failed');
+    }
     $s = $pdo->prepare('SELECT image_path FROM events WHERE event_id = ? LIMIT 1');
+    if (!$s) {
+        throw new Exception('Query preparation failed');
+    }
     $s->execute([$event_id]);
     $row = $s->fetch(PDO::FETCH_ASSOC);
     if ($row && !empty($row['image_path'])) {
@@ -28,11 +34,23 @@ try {
     }
 
     // delete registrations for the event
+    if (!$pdo) {
+        throw new Exception('Database connection failed');
+    }
     $d1 = $pdo->prepare('DELETE FROM registrations WHERE event_id = ?');
+    if (!$d1) {
+        throw new Exception('Delete registrations query preparation failed');
+    }
     $d1->execute([$event_id]);
 
     // delete the event
+    if (!$pdo) {
+        throw new Exception('Database connection failed');
+    }
     $d2 = $pdo->prepare('DELETE FROM events WHERE event_id = ?');
+    if (!$d2) {
+        throw new Exception('Delete event query preparation failed');
+    }
     $d2->execute([$event_id]);
 
     $_SESSION['flash']['success'][] = 'Event deleted.';

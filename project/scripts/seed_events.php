@@ -26,7 +26,15 @@ $events = [
 $inserted = 0;
 foreach ($events as $e) {
     // Check if an event with same title and date exists
+    if (!$pdo) {
+        echo "Database connection failed\n";
+        exit(1);
+    }
     $stmt = $pdo->prepare("SELECT event_id FROM events WHERE title = ? AND date = ? LIMIT 1");
+    if (!$stmt) {
+        echo "Query preparation failed\n";
+        exit(1);
+    }
     $stmt->execute([$e['title'], $e['date']]);
     $exists = $stmt->fetch();
     if ($exists) {
@@ -34,9 +42,17 @@ foreach ($events as $e) {
         continue;
     }
 
+    if (!$pdo) {
+        echo "Database connection failed\n";
+        exit(1);
+    }
     $ins = $pdo->prepare(
         "INSERT INTO events (title, date, time, venue, organizer, description, image_path) VALUES (:title, :date, :time, :venue, :organizer, :description, NULL)"
     );
+    if (!$ins) {
+        echo "Insert preparation failed\n";
+        exit(1);
+    }
 
     $ins->execute([
         ':title' => $e['title'],

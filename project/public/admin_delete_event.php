@@ -12,7 +12,15 @@ if (!$event_id) {
     exit;
 }
 
+if (!$pdo) {
+    http_response_code(500);
+    exit('Database connection failed');
+}
 $stmt = $pdo->prepare('SELECT event_id, title, date FROM events WHERE event_id = ? LIMIT 1');
+if (!$stmt) {
+    http_response_code(500);
+    exit('Database query preparation failed');
+}
 $stmt->execute([$event_id]);
 $event = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$event) {

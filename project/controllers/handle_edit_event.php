@@ -83,7 +83,13 @@ if ($imagePath === null) {
 } else {
     // remove old image if present
     try {
+        if (!$pdo) {
+            throw new Exception('Database connection failed');
+        }
         $s = $pdo->prepare('SELECT image_path FROM events WHERE event_id = ? LIMIT 1');
+        if (!$s) {
+            throw new Exception('Query preparation failed');
+        }
         $s->execute([$event_id]);
         $old = $s->fetch(PDO::FETCH_ASSOC);
         if (!empty($old['image_path'])) {
@@ -106,7 +112,19 @@ if ($imagePath === null) {
     ];
 }
 
+if (!$pdo) {
+    ob_end_clean();
+    $_SESSION['flash']['danger'][] = 'Database connection failed.';
+    header('Location: /admin_edit_event.php?id=' . $event_id);
+    exit;
+}
 $stmt = $pdo->prepare($sql);
+if (!$stmt) {
+    ob_end_clean();
+    $_SESSION['flash']['danger'][] = 'Database query preparation failed.';
+    header('Location: /admin_edit_event.php?id=' . $event_id);
+    exit;
+}
 $stmt->execute($params);
 
 $_SESSION['flash']['success'][] = 'Event updated successfully.';
