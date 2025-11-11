@@ -1,10 +1,18 @@
 # Student Event Management (SEM)
 
+**Institute of Technology, University of Moratuwa**
+
 A modern, secure web application for managing university events. Students can browse, view details, and register for events. Admins can create, edit, delete events, and view all registrations.
 
 ![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?style=flat-square&logo=php)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=flat-square&logo=bootstrap)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+
+---
+
+**Author**: Sivaranjan Dinath  
+**Registration Number**: 23IT0471  
+**Institution**: Institute of Technology, University of Moratuwa
 
 ---
 
@@ -437,7 +445,9 @@ This project is open-source and available under the **MIT License**.
 
 **Project**: Student Event Management System  
 **Version**: 1.0.0  
-**Last Updated**: November 2025
+**Last Updated**: November 2025  
+**Author**: Sivaranjan Dinath (23IT0471)  
+**Institution**: Institute of Technology, University of Moratuwa
 
 For issues, questions, or contributions, please visit the [GitHub repository](https://github.com/Dinath2002/student-event-management).
 
