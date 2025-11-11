@@ -1,7 +1,5 @@
-// script.js — small UI effects for Student Event Management
-
 document.addEventListener("DOMContentLoaded", () => {
-  // Auto-hide success alerts after 3 seconds
+  
   const alert = document.querySelector(".alert-success");
   if (alert) {
     setTimeout(() => {
@@ -11,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3000);
   }
 
-  // Smooth scroll to top when clicking footer links (optional)
+  
   const footerLinks = document.querySelectorAll("footer a[href^='#']");
   footerLinks.forEach(link => {
     link.addEventListener("click", e => {
@@ -23,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Form field focus glow
+  
   document.querySelectorAll(".form-control").forEach(input => {
     input.addEventListener("focus", () => {
       input.style.boxShadow = "0 0 0 3px rgba(47,129,247,0.3)";

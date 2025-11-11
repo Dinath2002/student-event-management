@@ -70,7 +70,6 @@ require_once __DIR__ . '/../config/auth.php';
 </nav>
 
 <?php
-// Flash message handler
 if (!empty($_SESSION['flash'])): ?>
   <div class="container mt-3">
     <?php foreach ($_SESSION['flash'] as $type => $messages): ?>

@@ -1,5 +1,4 @@
 <?php
-// Buffer output to prevent "headers already sent"
 ob_start();
 
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
@@ -7,6 +6,11 @@ require_once __DIR__ . '/../config/db.php';
 
 $email    = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
+
+if (!isset($pdo) || !$pdo) {
+  http_response_code(500);
+  exit('Database connection failed');
+}
 
 try {
   $stmt = $pdo->prepare("SELECT user_id, name, email, password, role FROM users WHERE email = ? LIMIT 1");
@@ -37,4 +41,4 @@ try {
   header('Location: /index.php', true, 303);
   exit;
 }
-// no closing tag
+ 

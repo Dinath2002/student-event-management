@@ -2,6 +2,11 @@
 require_once __DIR__ . '/../config/auth.php';
 require_once __DIR__ . '/../config/db.php';
 
+if (!isset($pdo) || !$pdo) {
+    http_response_code(500);
+    exit('Database connection failed');
+}
+
 require_login();
 if (!is_admin()) {
     http_response_code(403);
@@ -62,7 +67,6 @@ if (!empty($_FILES['image']['name'])) {
             if (!move_uploaded_file($tmpPath, $destPath)) {
                 $errors[] = 'Error saving uploaded image.';
             } else {
-                // public URL path used in <img src="">
                 $imagePath = '/assets/img/events/' . $fileName;
             }
         }

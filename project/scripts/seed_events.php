@@ -1,6 +1,5 @@
 <?php
-// Seed sample events into the app DB using the app's config/db.php
-// Run from repo root: php project/scripts/seed_events.php
+ 
 
 require_once __DIR__ . '/../config/db.php';
 
@@ -25,7 +24,7 @@ $events = [
 
 $inserted = 0;
 foreach ($events as $e) {
-    // Check if an event with same title and date exists
+    
     if (!$pdo) {
         echo "Database connection failed\n";
         exit(1);

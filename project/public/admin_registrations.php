@@ -1,8 +1,11 @@
 <?php
-// admin_registrations.php
-
 require_once __DIR__ . '/../config/auth.php';
 require_once __DIR__ . '/../config/db.php';
+
+if (!isset($pdo) || !$pdo) {
+  http_response_code(500);
+  exit('Database connection failed');
+}
 
 require_admin(); // only admin
 

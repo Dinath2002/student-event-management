@@ -2,6 +2,11 @@
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 require_once __DIR__ . '/../config/db.php';
 
+if (!isset($pdo) || !$pdo) {
+  http_response_code(500);
+  exit('Database connection failed');
+}
+
 $name       = trim($_POST['name'] ?? '');
 $email      = trim($_POST['email'] ?? '');
 $student_id = trim($_POST['student_id'] ?? '');
@@ -13,7 +18,6 @@ if (!$name || !$email || !$password) {
 }
 
 try {
-  // check existing email
   $check = $pdo->prepare("SELECT 1 FROM users WHERE email = ? LIMIT 1");
   $check->execute([$email]);
   if ($check->fetch()) {

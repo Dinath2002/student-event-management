@@ -1,5 +1,4 @@
 <?php
-// Controller: handle_delete_event.php
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../config/auth.php';
@@ -18,7 +17,7 @@ if (!$event_id) {
 }
 
 try {
-    // fetch image path to delete file
+    
     if (!$pdo) {
         throw new Exception('Database connection failed');
     }
@@ -33,7 +32,7 @@ try {
         if (is_file($file)) @unlink($file);
     }
 
-    // delete registrations for the event
+    
     if (!$pdo) {
         throw new Exception('Database connection failed');
     }
@@ -43,7 +42,7 @@ try {
     }
     $d1->execute([$event_id]);
 
-    // delete the event
+    
     if (!$pdo) {
         throw new Exception('Database connection failed');
     }

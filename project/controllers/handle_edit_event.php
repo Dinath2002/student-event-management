@@ -1,5 +1,4 @@
 <?php
-// Controller: handle_edit_event.php
 ob_start();
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 require_once __DIR__ . '/../config/db.php';
@@ -26,7 +25,6 @@ if ($venue === '') $errors[] = 'Venue is required.';
 if ($organizer === '') $errors[] = 'Organizer is required.';
 
 $imagePath = null;
-// Handle optional upload
 if (!empty($_FILES['image']['name'])) {
     $file = $_FILES['image'];
     $tmpPath = $file['tmp_name'];
@@ -69,7 +67,6 @@ if ($errors) {
     exit;
 }
 
-// Build update SQL depending on whether image was uploaded
 if ($imagePath === null) {
     $sql = "UPDATE events SET title = :title, date = :date, venue = :venue, organizer = :organizer, description = :description WHERE event_id = :event_id";
     $params = [
@@ -81,7 +78,7 @@ if ($imagePath === null) {
         ':event_id' => $event_id,
     ];
 } else {
-    // remove old image if present
+    
     try {
         if (!$pdo) {
             throw new Exception('Database connection failed');
@@ -97,7 +94,6 @@ if ($imagePath === null) {
             if (is_file($oldPath)) @unlink($oldPath);
         }
     } catch (Throwable $e) {
-        // ignore unlink errors
     }
 
     $sql = "UPDATE events SET title = :title, date = :date, venue = :venue, organizer = :organizer, description = :description, image_path = :image_path WHERE event_id = :event_id";

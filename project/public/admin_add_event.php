@@ -115,7 +115,6 @@ include __DIR__ . '/../includes/header.php';
 </div>
 
 <script>
-  // Simple inline preview text for selected banner file
   const imageInput = document.getElementById('imageInput');
   const imagePreviewText = document.getElementById('imagePreviewText');
 
