@@ -1,0 +1,58 @@
+<?php
+// Seed sample events into the app DB using the app's config/db.php
+// Run from repo root: php project/scripts/seed_events.php
+
+require_once __DIR__ . '/../config/db.php';
+
+$events = [
+    [
+        'title' => 'AI Seminar 2025',
+        'date' => '2025-12-10',
+        'time' => '10:00:00',
+        'venue' => 'Dept. of IT Auditorium',
+        'organizer' => 'Dept. of IT',
+        'description' => 'Introduction to AI, LLMs and modern student projects.'
+    ],
+    [
+        'title' => 'Hackathon 2025',
+        'date' => '2025-12-15',
+        'time' => '09:00:00',
+        'venue' => 'Main Hall',
+        'organizer' => 'CS Society',
+        'description' => '24-hour coding challenge for student teams with prizes.'
+    ]
+];
+
+$inserted = 0;
+foreach ($events as $e) {
+    // Check if an event with same title and date exists
+    $stmt = $pdo->prepare("SELECT event_id FROM events WHERE title = ? AND date = ? LIMIT 1");
+    $stmt->execute([$e['title'], $e['date']]);
+    $exists = $stmt->fetch();
+    if ($exists) {
+        echo "Skipping existing event: {$e['title']} ({$e['date']})\n";
+        continue;
+    }
+
+    $ins = $pdo->prepare(
+        "INSERT INTO events (title, date, time, venue, organizer, description, image_path) VALUES (:title, :date, :time, :venue, :organizer, :description, NULL)"
+    );
+
+    $ins->execute([
+        ':title' => $e['title'],
+        ':date' => $e['date'],
+        ':time' => $e['time'],
+        ':venue' => $e['venue'],
+        ':organizer' => $e['organizer'],
+        ':description' => $e['description'],
+    ]);
+
+    $inserted++;
+    echo "Inserted: {$e['title']} ({$e['date']})\n";
+}
+
+if ($inserted === 0) {
+    echo "No new events inserted.\n";
+} else {
+    echo "Done. Inserted $inserted event(s).\n";
+}

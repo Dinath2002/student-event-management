@@ -1,7 +1,7 @@
 <?php include __DIR__ . '/../includes/header.php'; ?>
 
 <main class="auth-main">
-  <form class="card p-4 auth-card" method="post" action="/controllers/handle_register.php" onsubmit="return validateSignup(this)">
+  <form class="card p-4 auth-card" method="post" action="/handle_register.php" onsubmit="return validateSignup(this)">
     <h3 class="mb-3 text-center">Create an account</h3>
 
     <div class="row g-3">

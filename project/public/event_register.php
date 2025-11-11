@@ -39,10 +39,10 @@ include __DIR__ . '/../includes/header.php';
     </div>
 
     <div class="col-lg-5">
-      <form class="card p-3 auth-card"
-            method="post"
-            action="/controllers/handle_event_register.php"
-            onsubmit="return validateEventRegister(this)">
+  <form class="card p-3 auth-card"
+    method="post"
+    action="/handle_event_register.php"
+    onsubmit="return validateEventRegister(this)">
         <h4 class="mb-3">Register for this event</h4>
 
         <input type="hidden" name="event_id" value="<?= (int)$event['event_id'] ?>">

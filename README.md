@@ -50,3 +50,23 @@ Text	            #c9d1d9	        Readable light gray text
 Accent	          #2f81f7	        Buttons and links
 Border	          #30363d	        Dividers and outlines
 
+## About
+
+University students often organize various academic and extracurricular events, such as workshops, hackathons, and seminars. Efficient coordination and management of these events require an interactive system that allows users to register, view event details, and manage participation online. This project provides a simple, secure platform to support those needs: event listings, registration handling, and admin tools for creating and reviewing registrations.
+
+## Minimal DB schema (matching this codebase)
+
+If you prefer MySQL, use the SQL in `project/db/db_structure.sql` which matches what the PHP code expects. Key points:
+
+- `users` table: stores user accounts. Columns: `user_id` (PK), `name`, `email`, `password`, `role`, `student_id`, `created_at`.
+- `events` table: columns used by the code are `event_id`, `title`, `date`, `time`, `venue`, `organizer`, `description`, `image_path`, `created_by`, `created_at`.
+- `registrations` table: columns used are `reg_id`, `user_id`, `event_id`, `student_id`, `contact_no`, `created_at`.
+
+To import into MySQL (example):
+
+```bash
+mysql -u root -p < project/db/db_structure.sql
+```
+
+Or just run the app locally — it will fallback to a local SQLite DB at `project/db/dev.sqlite` if MySQL is not available.
+

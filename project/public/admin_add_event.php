@@ -10,7 +10,7 @@ include __DIR__ . '/../includes/header.php';
   <form
     class="card p-4 event-create-card"
     method="post"
-    action="/controllers/handle_add_event.php"
+    action="/handle_add_event.php"
     enctype="multipart/form-data"
   >
     <div class="d-flex justify-content-between align-items-baseline mb-1">
@@ -92,8 +92,8 @@ include __DIR__ . '/../includes/header.php';
         <input
           type="file"
           class="form-control"
-          name="banner"
-          id="bannerInput"
+          name="image"
+          id="imageInput"
           accept=".jpg,.jpeg,.png,.webp"
         >
       </div>
@@ -102,10 +102,10 @@ include __DIR__ . '/../includes/header.php';
         Recommended <strong>1200 × 600px</strong>, JPG / PNG / WebP,
         max <strong>2MB</strong>.
       </div>
-      <div id="bannerPreviewText"
-           class="text-muted mt-1"
-           style="font-size: 0.78rem; display: none;">
-      </div>
+   <div id="imagePreviewText"
+     class="text-muted mt-1"
+     style="font-size: 0.78rem; display: none;">
+   </div>
     </div>
 
     <button class="btn btn-primary w-100" type="submit">
@@ -116,29 +116,29 @@ include __DIR__ . '/../includes/header.php';
 
 <script>
   // Simple inline preview text for selected banner file
-  const bannerInput = document.getElementById('bannerInput');
-  const bannerPreviewText = document.getElementById('bannerPreviewText');
+  const imageInput = document.getElementById('imageInput');
+  const imagePreviewText = document.getElementById('imagePreviewText');
 
-  if (bannerInput && bannerPreviewText) {
-    bannerInput.addEventListener('change', function () {
+  if (imageInput && imagePreviewText) {
+    imageInput.addEventListener('change', function () {
       const file = this.files[0];
       if (!file) {
-        bannerPreviewText.style.display = 'none';
-        bannerPreviewText.textContent = '';
+        imagePreviewText.style.display = 'none';
+        imagePreviewText.textContent = '';
         return;
       }
 
       const mb = file.size / (1024 * 1024);
-      bannerPreviewText.style.display = 'block';
+      imagePreviewText.style.display = 'block';
 
       if (mb > 2) {
-        bannerPreviewText.textContent =
+        imagePreviewText.textContent =
           `Selected: ${file.name} (${mb.toFixed(2)} MB) — too large, please choose a file under 2MB.`;
-        bannerPreviewText.style.color = '#f85149'; // soft red
+        imagePreviewText.style.color = '#f85149'; // soft red
       } else {
-        bannerPreviewText.textContent =
+        imagePreviewText.textContent =
           `Selected: ${file.name} (${mb.toFixed(2)} MB)`;
-        bannerPreviewText.style.color = '#8b949e';
+        imagePreviewText.style.color = '#8b949e';
       }
     });
   }

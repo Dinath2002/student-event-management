@@ -32,7 +32,7 @@ CREATE TABLE events (
     venue         VARCHAR(255) NOT NULL,
     organizer     VARCHAR(255) DEFAULT NULL,
     description   TEXT,
-    banner_path   VARCHAR(255) DEFAULT NULL,  -- for uploaded event image (if used)
+    image_path    VARCHAR(255) DEFAULT NULL,
     created_by    INT UNSIGNED NULL,
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_events_created_by
@@ -46,11 +46,9 @@ CREATE TABLE registrations (
     reg_id        INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id       INT UNSIGNED NOT NULL,
     event_id      INT UNSIGNED NOT NULL,
-    name          VARCHAR(150) NOT NULL,
     student_id    VARCHAR(50) NULL,
-    email         VARCHAR(150) NOT NULL,
-    phone         VARCHAR(30) NULL,
-    registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    contact_no    VARCHAR(50) NULL,
+    created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_reg_user
       FOREIGN KEY (user_id) REFERENCES users(user_id)
