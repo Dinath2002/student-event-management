@@ -1,8 +1,8 @@
 <?php include __DIR__ . '/../includes/header.php'; ?>
 
-<div class="gh-page auth-center">
+<main class="auth-main">
   <form class="card p-4 auth-card" method="post" action="/controllers/handle_register.php" onsubmit="return validateSignup(this)">
-    <h3 class="mb-3">Create an account</h3>
+    <h3 class="mb-3 text-center">Create an account</h3>
 
     <div class="row g-3">
       <div class="col-12">
@@ -32,11 +32,14 @@
       <small>Already have an account? <a href="/login.php">Sign in</a></small>
     </div>
   </form>
-</div>
+</main>
 
 <script>
 function validateSignup(f){
-  if (f.password.value.length < 6) { alert('Password must be at least 6 characters.'); return false; }
+  if (f.password.value.length < 6) { 
+    alert('Password must be at least 6 characters.'); 
+    return false; 
+  }
   return true;
 }
 </script>

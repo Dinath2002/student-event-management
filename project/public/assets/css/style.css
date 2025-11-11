@@ -1,11 +1,13 @@
+/* php -S localhost:8000 -t project/public */
+
 /* ================================
-   GitHub DARK – Complete Style Fix
+   GitHub DARK – Base Design Tokens
    ================================ */
 :root {
-  --bg: #0d1117;            /* full-page background */
+  --bg: #0d1117;            /* page background */
   --panel: #161b22;         /* cards, navbars, footer */
   --border: #30363d;
-  --text: #f0f6fc;          /* bright readable text */
+  --text: #f0f6fc;          /* bright text */
   --muted: #8b949e;
   --accent: #2f81f7;
   --accent-hover: #1f6feb;
@@ -13,11 +15,28 @@
   --link-hover: #79c0ff;
   --radius: 12px;
   --shadow: 0 0 0 1px rgba(240,246,252,0.05), 0 8px 24px rgba(1,4,9,0.6);
+
+  /* Bootstrap-ish overrides for consistency */
+  --bs-body-color: var(--text);
+  --bs-secondary-color: #9aa4af;
+  --bs-secondary-color-rgb: 154,164,175;
+  --bs-border-color: var(--border);
 }
 
-/* Reset + base */
-* { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; padding: 0; }
+/* ================================
+   Reset + Base Layout
+   ================================ */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif;
   background-color: var(--bg);
@@ -27,32 +46,25 @@ body {
   min-height: 100vh;
 }
 
-/* Navbar */
+/* ================================
+   Navbar + Logo
+   ================================ */
 .navbar {
-  background: var(--panel) !important;
+  background-color: var(--panel) !important;
   border-bottom: 1px solid var(--border);
-}
-.navbar-brand {
-  color: var(--text) !important;
-  font-weight: 600;
-}
-.navbar .nav-link {
-  color: var(--muted) !important;
-  transition: 0.2s;
-}
-.navbar .nav-link:hover {
-  color: var(--text) !important;
-}
-/* Navbar + logo */
-.navbar {
-  background-color: #161b22 !important;
-  border-bottom: 1px solid #30363d;
 }
 
 .navbar-brand {
   font-size: 1.1rem;
-  color: #f0f6fc !important;
+  color: var(--text) !important;
+  font-weight: 600;
 }
+
+.navbar .nav-link {
+  color: var(--muted) !important;
+}
+
+/* GitHub-style underline handled later in transitions section */
 
 .nav-logo {
   height: 30px;
@@ -60,15 +72,11 @@ body {
   border-radius: 8px;
   object-fit: cover;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
-  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.nav-logo:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
-}
-
-/* Cards */
+/* ================================
+   Cards
+   ================================ */
 .card {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -77,301 +85,100 @@ body {
   box-shadow: var(--shadow);
 }
 
-/* Buttons */
+/* Auth cards (login / register) */
+.auth-card {
+  width: 420px;
+  background-color: var(--panel) !important;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+.auth-card h2 {
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+/* ================================
+   Buttons
+   ================================ */
 .btn {
   border-radius: 8px;
   border: 1px solid var(--border);
   color: var(--text);
 }
 
-/* Main accent button with gradient + glow */
+/* Main accent: green gradient (GitHub-ish success feel) */
 .btn-primary {
   background: linear-gradient(90deg, #238636, #2ea043) !important;
   border: none !important;
-  color: #fff !important;
+  color: #ffffff !important;
   font-weight: 500;
   box-shadow: 0 0 10px rgba(35, 134, 54, 0.4);
-  transition: all 0.2s ease-in-out;
-}
-.btn-primary:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 14px rgba(46, 160, 67, 0.6);
 }
 
-/* Disabled state styling for visibility */
+/* Visible disabled state */
 .btn:disabled,
 .btn.disabled {
   background: #2f81f7 !important;
   border: none !important;
-  color: #fff !important;
+  color: #ffffff !important;
   opacity: 0.6;
 }
 
-/* Success variant */
+/* Success variant (if used separately) */
 .btn-success {
-  background: #238636;
-  border-color: #238636;
-}
-.btn-success:hover {
-  background: #2ea043;
-  border-color: #2ea043;
+  background: #238636 !important;
+  border-color: #238636 !important;
+  color: #ffffff !important;
 }
 
-/* Inputs */
+.btn-success:hover {
+  background: #2ea043 !important;
+  border-color: #2ea043 !important;
+}
+
+/* Outline primary (e.g., "Login to Register") */
+.btn-outline-primary {
+  color: var(--link) !important;
+  border-color: #3a3f45 !important;
+  background: transparent !important;
+}
+
+.btn-outline-primary:hover {
+  color: #ffffff !important;
+  background: rgba(47,129,247,.18) !important;
+  border-color: var(--accent) !important;
+}
+
+/* ================================
+   Forms / Inputs
+   ================================ */
 .form-label {
   color: var(--text);
   font-weight: 500;
 }
+
 .form-control {
   background: #0d1117;
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 8px;
 }
+
 .form-control::placeholder {
   color: #9aa4af;
 }
+
 .form-control:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 0.25rem rgba(47,129,247,0.3);
   outline: 0;
 }
 
-/* Headings */
-h1, h2, h3, h4, h5, h6 {
-  color: var(--text);
-  font-weight: 600;
-}
-
-/* Links */
-a {
-  color: var(--link);
-  text-decoration: none;
-}
-a:hover {
-  color: var(--link-hover);
-  text-decoration: underline;
-}
-
-/* Alerts */
-.alert {
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  color: var(--text);
-}
-.alert-secondary {
-  background: #161b22;
-  color: var(--text);
-}
-
-/* Layout helpers */
-.gh-page {
-  flex: 1;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 24px 16px;
-}
-.auth-center {
-  min-height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.auth-card {
-  width: 420px;
-}
-
-/* Footer */
-footer {
-  background: var(--panel);
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  text-align: center;
-  padding: 12px 0;
-  font-size: 0.9rem;
-}
-
-/* Event cards */
-.event-card {
-  background: var(--panel);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-.event-card .title {
-  font-weight: 600;
-  color: var(--text);
-}
-.event-card .meta {
-  color: var(--muted);
-}
-.auth-card {
-  background: #161b22;
-  box-shadow: 0 8px 24px rgba(1,4,9,0.85);
-  border: 1px solid var(--border);
-}
-/* === Override Bootstrap white backgrounds === */
-body,
-html,
-.container,
-.gh-page,
-section,
-main,
-div.bg-light,
-div.bg-white,
-.bg-body,
-.bg-light,
-.bg-white {
-  background-color: #0d1117 !important; /* GitHub page background */
-  color: #f0f6fc !important;             /* ensure readable text */
-}
-
-/* Card and content sections slightly lighter for depth */
-.card,
-.navbar,
-footer,
-.auth-card {
-  background-color: #161b22 !important;
-  border-color: #30363d !important;
-}
-
-/* Make sure all headings and paragraphs are bright */
-h1, h2, h3, h4, h5, h6, p, label, small, strong, span {
-  color: #f0f6fc !important;
-}
-
-/* Ensure alert boxes, forms, etc. match dark mode */
-input, textarea, select {
-  background-color: #0d1117 !important;
-  color: #f0f6fc !important;
-  border: 1px solid #30363d !important;
-}
-input:focus, textarea:focus, select:focus {
-  border-color: #2f81f7 !important;
-  box-shadow: 0 0 0 0.2rem rgba(47,129,247,0.25);
-  outline: none;
-}
-
-/* Links */
-a { color: #58a6ff !important; }
-a:hover { color: #79c0ff !important; }
-
-/* Footer contrast */
-footer {
-  background-color: #161b22 !important;
-  color: #8b949e !important;
-}
-/* ===== Visibility fixes for Events page (dark) ===== */
-
-/* Make all Bootstrap "muted/secondary" text readable */
-:root {
-  --bs-body-color: var(--text);
-  --bs-secondary-color: #9aa4af;              /* text-muted / text-body-secondary */
-  --bs-secondary-color-rgb: 154,164,175;
-  --bs-border-color: var(--border);
-}
-
-.text-muted,
-.text-body-secondary,
-.small,
-.form-text {
-  color: #9aa4af !important;
-}
-
-/* Card content contrast */
-.card .card-title,
-.card .title { color: var(--text) !important; }
-
-.card .meta,
-.card .subtitle,
-.card .card-subtitle { color: #9aa4af !important; }
-
-.card .card-text { color: #c9d1d9 !important; }  /* descriptions */
-
-/* Outline buttons on dark (e.g., "Login to Register") */
-.btn-outline-primary {
-  color: var(--link) !important;
-  border-color: #3a3f45 !important;
-  background: transparent !important;
-}
-.btn-outline-primary:hover {
-  color: #fff !important;
-  background: rgba(47,129,247,.18) !important;
-  border-color: var(--accent) !important;
-}
-
-/* Badges like "Auditorium", "Main Hall" (often bg-light) */
-.badge,
-.badge.bg-light,
-.badge.text-bg-light {
-  background: #0d1117 !important;
-  color: #c9d1d9 !important;
-  border: 1px solid #30363d !important;
-}
-
-/* Any faint borders inside event cards */
-.card .form-control,
-.card .list-group-item {
-  border-color: var(--border) !important;
-  background: #0f141b !important;
-  color: var(--text) !important;
-}
-
-
-/* ===== Footer logo inside thin bar ===== */
-footer {
-  background-color: #161b22 !important;
-  border-top: 1px solid #30363d;
-}
-
-/* footer bar container */
-.footer-bar {
-  background-color: #161b22 !important;
-  border-top: 1px solid #30363d;
-  color: #8b949e;
-  text-align: center;
-  font-size: 0.9rem;
-  padding: 0.7rem 0;
-}
-
-/* logo inside footer */
-.footer-bar-logo {
-  height: 45px;               /* smaller and balanced height */
-  width: auto;
-  border-radius: 10px;        /* rounded edges */
-  opacity: 0.95;              /* corrected from 1.95 (invalid) */
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.footer-bar-logo:hover {
-  opacity: 1;
-  transform: scale(1.03);
-}
-/* === Final polish for login/register centering === */
-.gh-auth-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-  padding-top: 20px;
-}
-
-.auth-card {
-  width: 420px;
-  background-color: #161b22 !important;
-  border: 1px solid #30363d;
-  border-radius: 14px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
-}
-
-.auth-card h2 {
-  color: #f0f6fc;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-}
-
+/* Auth forms specifically */
 .auth-card .form-label {
   color: #c9d1d9;
 }
@@ -384,70 +191,399 @@ footer {
 
 .auth-card .form-control:focus {
   border-color: #2f81f7;
-  box-shadow: 0 0 0 2px rgba(47, 129, 247, 0.25);
+  box-shadow: 0 0 0 2px rgba(47,129,247,0.25);
+}
+
+/* ================================
+   Typography & Links
+   ================================ */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+  font-weight: 600;
+}
+
+p, label, small, strong, span {
+  color: var(--text);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* ================================
+   Alerts
+   ================================ */
+.alert {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  color: var(--text);
+  background-color: var(--panel);
+}
+
+.alert-secondary {
+  background: #161b22;
+  color: var(--text);
+}
+
+/* Success alert (green instead of yellow) */
+.alert-success {
+  background-color: #1a472a !important;
+  color: #c9f7d0 !important;
+  border: 1px solid #26734d !important;
+}
+
+/* ================================
+   Layout Helpers
+   ================================ */
+.gh-page {
+  flex: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.gh-auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding-top: 20px;
 }
 
 .gh-auth-subtext {
   text-align: center;
   font-size: 0.9rem;
-  color: #8b949e;
+  color: var(--muted);
 }
 
 .gh-auth-subtext a {
-  color: #58a6ff;
-  text-decoration: none;
+  color: var(--link);
 }
 
 .gh-auth-subtext a:hover {
-  text-decoration: underline;
+  color: var(--link-hover);
 }
-/* ===== Final visibility fixes for Events page ===== */
 
-/* Event card titles */
+/* ================================
+   Dark Overrides (no white blocks)
+   ================================ */
+body,
+html,
+.container,
+.gh-page,
+section,
+main,
+div.bg-light,
+div.bg-white,
+.bg-body,
+.bg-light,
+.bg-white {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+/* Panels */
+.card,
+.navbar,
+footer,
+.auth-card {
+  background-color: var(--panel) !important;
+  border-color: var(--border) !important;
+}
+
+/* Text muted / secondary */
+.text-muted,
+.text-body-secondary,
+.small,
+.form-text {
+  color: #9aa4af !important;
+}
+
+/* Generic input override (safety net) */
+input,
+textarea,
+select {
+  background-color: #0d1117 !important;
+  color: #f0f6fc !important;
+  border: 1px solid #30363d !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #2f81f7 !important;
+  box-shadow: 0 0 0 0.2rem rgba(47,129,247,0.25);
+  outline: none;
+}
+
+/* ================================
+   Events Page Styling
+   ================================ */
+.event-card {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
 .event-card .title,
 .card.event-card .card-title {
   color: #f0f6fc !important;
   font-weight: 600;
 }
 
-/* Meta line: date, organizer, etc. */
 .event-card .meta {
-  color: #9fb5d1 !important;    /* lighter blue-grey, clearly visible */
+  color: #9fb5d1 !important;
   font-size: 0.9rem;
 }
 
-/* Descriptions inside cards */
 .event-card .card-text,
 .event-card p,
 .event-card .text-muted {
-  color: #c9d1d9 !important;    /* readable body text */
+  color: #c9d1d9 !important;
 }
 
-/* Venue badges (Auditorium / Main Hall) */
+/* Venue badges */
 .event-card .badge,
 .event-card .badge.bg-light,
-.event-card .badge.text-bg-light {
+.event-card .badge.text-bg-light,
+.badge,
+.badge.bg-light,
+.badge.text-bg-light {
   background-color: #21262d !important;
   color: #f0f6fc !important;
   border: 1px solid #30363d !important;
   font-weight: 500;
 }
 
-/* Outline "Login to Register" buttons on dark bg */
+/* "Login to Register" / outline buttons in event cards */
 .event-card .btn-outline-secondary,
 .event-card .btn-outline-primary {
   color: #58a6ff !important;
   border-color: #3a3f45 !important;
   background-color: transparent !important;
 }
+
 .event-card .btn-outline-secondary:hover,
 .event-card .btn-outline-primary:hover {
   color: #ffffff !important;
   background-color: rgba(47,129,247,0.18) !important;
   border-color: #2f81f7 !important;
 }
-.alert-success {
-  background-color: #1a472a !important;  /* dark green background */
-  color: #c9f7d0 !important;              /* soft green text */
-  border: 1px solid #26734d !important;  /* accent border */
+
+/* ================================
+   Footer + Logo Bar
+   ================================ */
+footer {
+  background-color: var(--panel) !important;
+  border-top: 1px solid var(--border);
+  color: var(--muted) !important;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 0.9rem;
+}
+
+/* Thin footer bar (used if you place logo there) */
+.footer-bar {
+  background-color: var(--panel) !important;
+  border-top: 1px solid var(--border);
+  color: #8b949e;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0.7rem 0;
+}
+
+.footer-bar-logo {
+  height: 45px;
+  width: auto;
+  border-radius: 10px;
+  opacity: 0.95;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-bar-logo:hover {
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+/* ================================
+   Smooth Transitions & Animations
+   ================================ */
+
+/* Page fade-in */
+body {
+  opacity: 0;
+  animation: gh-page-fade-in 0.35s ease-out forwards;
+}
+
+@keyframes gh-page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navbar links – subtle underline + color on hover */
+.navbar .nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+  opacity: 0;
+}
+
+.navbar .nav-link:hover {
+  color: var(--text) !important;
+}
+
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* Brand logo hover */
+.nav-logo {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-logo:hover {
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+  opacity: 0.96;
+}
+
+/* Buttons – smooth + slight lift */
+.btn {
+  transition:
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.16s ease;
+}
+
+.btn-primary,
+.btn-success {
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(46, 160, 255, 0.25);
+}
+
+/* Outline buttons hover */
+.btn-outline-primary {
+  transition:
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.16s ease;
+}
+
+.btn-outline-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(88, 166, 255, 0.18);
+}
+
+/* Cards / event tiles – lift on hover */
+.card,
+.event-card,
+.auth-card {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background-color 0.22s ease;
+}
+
+.card:hover,
+.event-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(1, 4, 9, 0.75);
+  border-color: var(--accent);
+}
+
+/* Keep auth card slightly softer */
+.auth-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(1, 4, 9, 0.85);
+}
+
+/* Inputs – smooth focus highlight */
+.form-control {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Flash alerts – slide/fade in */
+.alert {
+  animation: gh-alert-in 0.25s ease-out;
+}
+
+@keyframes gh-alert-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Footer link hover */
+footer a {
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+footer a:hover {
+  color: var(--link-hover) !important;
+  opacity: 1;
+}
+/* ================================
+   Center Register Page + Footer
+   ================================ */
+.auth-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px); /* ensures center between navbar + footer */
+  padding: 20px 0;
+}
+
+footer {
+  margin-top: auto;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
