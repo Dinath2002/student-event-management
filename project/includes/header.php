@@ -48,6 +48,11 @@ require_once __DIR__ . '/../config/auth.php';
       <ul class="navbar-nav ms-auto">
         <?php if (is_logged_in()): ?>
           <li class="nav-item">
+            <a class="nav-link<?= ($_SERVER['REQUEST_URI'] === '/profile.php') ? ' active' : '' ?>" href="/profile.php">
+              👤 Profile
+            </a>
+          </li>
+          <li class="nav-item">
             <span class="nav-link disabled">
               <?= htmlspecialchars(current_user()['name']) ?>
               <?php if (is_admin()): ?> (Admin)<?php endif; ?>
