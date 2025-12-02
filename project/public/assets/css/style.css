@@ -130,7 +130,7 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55); /* softer shadow */
   transition: all 0.18s ease;
   margin: 0 auto;
-  padding: 1.8rem 1.6rem; /* keep internal padding consistent */
+  padding: 1.8rem 1.6rem;
 }
 
 .auth-card:hover {
