@@ -122,10 +122,10 @@ body {
 }
 
 .auth-card {
-  width: 420px; /* slightly narrower for sign-up */
+  width: 420px;
   max-width: calc(100% - 40px);
   background-color: var(--panel) !important;
-  border: 1px solid rgba(255,255,255,0.03); /* very subtle border */
+  border: 1px solid rgba(255,255,255,0.03);
   border-radius: 14px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55); /* softer shadow */
   transition: all 0.18s ease;
